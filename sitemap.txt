@@ -1,3 +1,4 @@
+http://example.com/%E5%9F%BA%E4%BA%8Epython%E7%9A%84sqlite3%E8%BF%9E%E6%8E%A5%E6%B1%A0/
 http://example.com/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/
 http://example.com/kmp%E7%AE%97%E6%B3%95/
 http://example.com/categories/index.html
@@ -52,6 +53,7 @@ http://example.com/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/
 http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/
 http://example.com/tags/python/
 http://example.com/tags/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/
+http://example.com/tags/sqlite3/
 http://example.com/categories/C/
 http://example.com/categories/%E5%A4%9A%E8%BF%9B%E7%A8%8B/
 http://example.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/
@@ -65,3 +67,4 @@ http://example.com/categories/%E6%9D%82/
 http://example.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/
 http://example.com/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/
 http://example.com/categories/demo/
+http://example.com/categories/python/

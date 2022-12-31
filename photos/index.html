@@ -7,23 +7,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>链接(一) | lin&#39;s blog</title>
+  <title>相册 | lin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="可执行文件的生成步骤">
-<meta property="og:type" content="article">
-<meta property="og:title" content="链接(一)">
-<meta property="og:url" content="http://example.com/%E9%93%BE%E6%8E%A5(%E4%B8%80)/index.html">
+  <meta name="description" content="Ins 	摄影   	图片来自github，正在加载中…     (function() {     var loadScript &#x3D; function(path) {       var $script &#x3D; document.createElement(&#39;script&#39;)       document.getElementsByTagName(&#39;body&#39;)[0].appendChild(">
+<meta property="og:type" content="website">
+<meta property="og:title" content="相册">
+<meta property="og:url" content="http://example.com/photos/index.html">
 <meta property="og:site_name" content="lin&#39;s blog">
-<meta property="og:description" content="可执行文件的生成步骤">
+<meta property="og:description" content="Ins 	摄影   	图片来自github，正在加载中…     (function() {     var loadScript &#x3D; function(path) {       var $script &#x3D; document.createElement(&#39;script&#39;)       document.getElementsByTagName(&#39;body&#39;)[0].appendChild(">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img/hello.png">
-<meta property="og:image" content="http://example.com/img/%E6%AD%A5%E9%AA%A4.png">
-<meta property="article:published_time" content="2022-11-13T16:04:39.000Z">
-<meta property="article:modified_time" content="2022-12-11T10:11:18.576Z">
+<meta property="article:published_time" content="2022-12-31T09:14:46.429Z">
+<meta property="article:modified_time" content="2022-12-31T09:14:46.429Z">
 <meta property="article:author" content="lin">
-<meta property="article:tag" content="csapp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/hello.png">
   
     <link rel="alternative" href="/atom.xml" title="lin&#39;s blog" type="application/atom+xml">
   
@@ -173,51 +169,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-链接(一)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-photos" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      链接(一)
+      相册
     </h1>
   
 
-        
-        <a href="/%E9%93%BE%E6%8E%A5(%E4%B8%80)/" class="archive-article-date">
-  	<time datetime="2022-11-13T16:04:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-14</time>
-</a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>可执行文件的生成步骤<span id="more"></span><br>
-<img src="/img/hello.png" alt=""><br>
-可执行文件的生成过程如下图：<br>
-<img src="/img/%E6%AD%A5%E9%AA%A4.png" alt=""><br>
-如图，可执行文件的生成需要经过预处理、编译、汇编和链接这4个过程。其中：<br>
-预处理的工作：<br>
-删除 #define 并展开宏定义<br>
-处理所有的条件预编译指令，如 “#if”，“#ifdef”，&quot;#endif&quot;等<br>
-插入头文件到 “#include” 处，可以递归方式进行处理<br>
-删除所有的注释<br>
-添加行号和文件名标识，以便编译时编译器产生调试用的行号信息<br>
-保留所有 #pragma 编译指令（编译器需要用）<br>
-命令示例如下：<br>
-gcc -E hello.c -o hello.i<br>
-经过预编译处理后，得到的是预处理文件（如，hello.i），它还是一个可读的文本文件，但不包含任何宏定义。</p>
-<p>编译的工作<br>
-编译过程就是将预处理后得到的预处理文件（如hello.i）进行词法分析、语法分析、语义分析、优化后，生成汇编代码文件。<br>
-经过编译后，得到的汇编代码文件（如，hello.S）还是一个可读的文本文件。<br>
-命令示例如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -S hello.i -o hello.s</span><br><span class="line">gcc -S hello.c -o hello.s</span><br></pre></td></tr></table></figure>
-<p>汇编的工作<br>
-汇编器将编译得到的汇编代码文件转换成机器指令序列。<br>
-汇编的结果是一个可重定位目标文件（如，hello.o）其中包含的是不可读的二进制代码。<br>
-命令示例如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -c hello.s -o hello.o</span><br><span class="line">gcc -c hello.c -o hello.o</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+        <link rel="stylesheet" href="./ins.css">
+<div class="photos-btn-wrap">
+	<a class="photos-btn active" href="javascript:void(0)">Ins</a>
+	<a class="photos-btn" target="_blank" href="https://gitlgl.github.io/">摄影</a>
+</div>
+<div class="instagram itemscope">
+	<a href="https://github.com/gitlGl/BlogPicture/" target="_blank" class="open-ins">图片来自github，正在加载中…</a>
+</div>
+<script>
+  (function() {
+    var loadScript = function(path) {
+      var $script = document.createElement('script')
+      document.getElementsByTagName('body')[0].appendChild($script)
+      $script.setAttribute('src', path)
+    }
+    setTimeout(function() {
+      loadScript('./ins.js')
+    }, 0)
+  })()
+</script><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
 
       
@@ -251,29 +238,7 @@ gcc -E hello.c -o hello.i<br>
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">csapp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/操作系统//" class="article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -284,25 +249,6 @@ gcc -E hello.c -o hello.i<br>
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          虚拟地址
-        
-      </div>
-    </a>
-  
-  
-    <a href="/csapp%E9%87%8D%E7%82%B9%E6%91%98%E6%8A%84/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">内存共享、写时复制</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -321,44 +267,6 @@ gcc -E hello.c -o hello.i<br>
 </aside>
 
 
-
-
-  
-    <section id="comments" class="comments">
-      <style>
-        .comments{margin:30px;padding:10px;background:#fff}
-        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
-      </style>
-      <div id="vcomment" class="comment"></div> 
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-   var notify = 'true' == true ? true : false;
-   var verify = 'false' == true ? true : false;
-    window.onload = function() {
-        new Valine({
-            el: '.comment',
-            notify: notify,
-            verify: verify,
-            app_id: "fOP99LMoN6FNf9eZOOOqvNZU-gzGzoHsz",
-            app_key: "kDhlWgXLHOHQValPe3gUw7rb",
-            placeholder: "Just go go",
-            avatar:"hide"
-        });
-    }
-</script>
-  </section>
-
-
-  
-  
-  
-
-  
-
-  
-
-  
 
 
           </div>
@@ -381,7 +289,7 @@ gcc -E hello.c -o hello.i<br>
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

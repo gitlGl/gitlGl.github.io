@@ -272,8 +272,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="asyncio-wait-和-asyncio-gather-的不同">asyncio.wait 和 asyncio.gather 的不同</h4>
-<p>不同：asyncio.wait 会返回两个值：done 和 pending，done 为已完成的协程 Task，pending 为超时未完成的协程 Task，需通过 future.result 调用 Task 的 result；而asyncio.gather 返回的是所有已完成 Task 的 result，不需要再进行调用或其他操作，就可以得到全部结果。</p>
+        <p><strong>asyncio.wait 用法：</strong></p>
         
       
 

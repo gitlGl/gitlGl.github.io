@@ -1,4 +1,5 @@
 http://example.com/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/
+http://example.com/go%E5%8C%85%E7%AE%A1%E7%90%86/
 http://example.com/%E8%87%AA%E5%AE%9A%E4%B9%89Windows%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/
 http://example.com/python-asyncio-await/
 http://example.com/pyqt5%E7%BA%BF%E7%A8%8B%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/
@@ -65,6 +66,7 @@ http://example.com/tags/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/
 http://example.com/tags/asyncio/
 http://example.com/tags/pyqt%E7%BA%BF%E7%A8%8B/
 http://example.com/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/
+http://example.com/tags/go/
 http://example.com/categories/C/
 http://example.com/categories/%E5%A4%9A%E8%BF%9B%E7%A8%8B/
 http://example.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/
@@ -81,3 +83,4 @@ http://example.com/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/
 http://example.com/categories/demo/
 http://example.com/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/
 http://example.com/categories/windows%E9%85%8D%E7%BD%AE/
+http://example.com/categories/go/

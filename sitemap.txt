@@ -1,3 +1,4 @@
+http://example.com/type%E4%B8%8Eobject%E7%9A%84%E5%85%B3%E7%B3%BB/
 http://example.com/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/
 http://example.com/go%E5%8C%85%E7%AE%A1%E7%90%86/
 http://example.com/%E8%87%AA%E5%AE%9A%E4%B9%89Windows%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/

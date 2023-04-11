@@ -1,3 +1,4 @@
+http://example.com/%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/
 http://example.com/type%E4%B8%8Eobject%E7%9A%84%E5%85%B3%E7%B3%BB/
 http://example.com/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/
 http://example.com/go%E5%8C%85%E7%AE%A1%E7%90%86/
@@ -85,3 +86,4 @@ http://example.com/categories/demo/
 http://example.com/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/
 http://example.com/categories/windows%E9%85%8D%E7%BD%AE/
 http://example.com/categories/go/
+http://example.com/categories/%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/

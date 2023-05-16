@@ -1,3 +1,4 @@
+https://gitlgl.github.io/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/
 https://gitlgl.github.io/%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/
 https://gitlgl.github.io/type%E4%B8%8Eobject%E7%9A%84%E5%85%B3%E7%B3%BB/
 https://gitlgl.github.io/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/
@@ -7,4 +8,3 @@ https://gitlgl.github.io/python-asyncio-await/
 https://gitlgl.github.io/pyqt5%E7%BA%BF%E7%A8%8B%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/
 https://gitlgl.github.io/sql%2050%E9%A2%98%E7%BB%83%E4%B9%A0/
 https://gitlgl.github.io/python%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/
-https://gitlgl.github.io/%E5%9F%BA%E4%BA%8Epython%E7%9A%84sqlite3%E8%BF%9E%E6%8E%A5%E6%B1%A0/

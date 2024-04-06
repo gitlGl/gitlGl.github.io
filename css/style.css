@@ -481,7 +481,7 @@ body {
   background-color: #fff;
   color: #383838;
   font-weight: 400;
-  font-size: medium;
+  font-size: 14px;
   font-family: "Menlo", "Meslo LG", monospace;
   line-height: 1.725;
   text-rendering: geometricPrecision;
@@ -1118,7 +1118,7 @@ article .content h2:before {
   color: #2bbc8a;
   content: "#";
   font-weight: bold;
-  font-size: medium;
+  font-size: 1.2rem;
 }
 article .content img,
 article .content video {
@@ -1159,7 +1159,7 @@ article .content blockquote:before {
   color: #2bbc8a;
   content: "\201C";
   vertical-align: -0.4em;
-  font-size: medium;
+  font-size: 2em;
   line-height: 0.1em;
 }
 article .content blockquote footer {

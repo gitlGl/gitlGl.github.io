@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1. 代码段（text）、数据段、堆栈 1.1 过程   程序运行过程是先分配内存，然后从硬盘载入程序（只是载入部分，局部性原理）到内存中，这部分存储程序的内存称为代码段。cpu从代码段段中获取指令进行相关操作，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统知识点">
+<meta property="og:url" content="http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="lin&#39;s blog">
+<meta property="og:description" content="1. 代码段（text）、数据段、堆栈 1.1 过程   程序运行过程是先分配内存，然后从硬盘载入程序（只是载入部分，局部性原理）到内存中，这部分存储程序的内存称为代码段。cpu从代码段段中获取指令进行相关操作，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/%E6%AE%B5.png">
+<meta property="og:image" content="http://example.com/img/%E8%99%9A%E6%8B%9F.png">
+<meta property="article:published_time" content="2022-11-12T23:21:22.000Z">
+<meta property="article:modified_time" content="2022-12-11T10:11:18.562Z">
+<meta property="article:author" content="lin">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/%E6%AE%B5.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>操作系统知识点</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="lin&#39;s blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/gitlGl">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/csapp%E9%87%8D%E7%82%B9%E6%91%98%E6%8A%84/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/%E7%94%9F%E4%BA%A7%E8%80%85%E4%B8%8E%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&text=操作系统知识点"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&is_video=false&description=操作系统知识点"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=操作系统知识点&body=Check out this article: http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&name=操作系统知识点&description=&lt;h3 id=&#34;1-代码段（text）、数据段、堆栈&#34;&gt;1. 代码段（text）、数据段、堆栈&lt;/h3&gt;
+&lt;p&gt;1.1 过程&lt;br&gt;
+  程序运行过程是先分配内存，然后从硬盘载入程序（只是载入部分，局部性原理）到内存中，这部分存储程序的内存称为代码段。cpu从代码段段中获取指令进行相关操作，"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&t=操作系统知识点"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%A3%E7%A0%81%E6%AE%B5%EF%BC%88text%EF%BC%89%E3%80%81%E6%95%B0%E6%8D%AE%E6%AE%B5%E3%80%81%E5%A0%86%E6%A0%88"><span class="toc-number">1.</span> <span class="toc-text">1. 代码段（text）、数据段、堆栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E3%80%81mmu"><span class="toc-number">2.</span> <span class="toc-text">2.虚拟地址、mmu</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        操作系统知识点
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">lin</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-11-12T23:21:22.000Z" class="dt-published" itemprop="datePublished">2022-11-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="1-代码段（text）、数据段、堆栈">1. 代码段（text）、数据段、堆栈</h3>
+<p>1.1 过程<br>
+  程序运行过程是先分配内存，然后从硬盘载入程序（只是载入部分，局部性原理）到内存中，这部分存储程序的内存称为代码段。cpu从代码段段中获取指令进行相关操作，<span id="more"></span>指令执行过程需要使用到的内存称为堆、栈。堆由程序进行申请与释放，生命周期由程序管理；栈由编译器进行申请与释放，生命周期由编译器管理。数据段一般指全局变量与静态变量，数据段的数据数据生命周期直到程序结束。bss段记录全局变量，静态变量的信息，如变量名称、大小，在程序执行期间才进行初始化分配内存与赋值。<br>
+1.2 关于字面量与常量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">5</span>;<span class="comment">//5时字面量，位于代码段</span></span><br><span class="line"><span class="type">char</span> *p = <span class="string">&quot;哈哈哈&quot;</span><span class="comment">//字符串字面量，位于只读数据段</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> P = <span class="number">5</span>;<span class="comment">//p是常量，5是字面量，编译器编译前进行替换处理</span></span><br><span class="line"><span class="type">int</span> b = p;<span class="comment">//编译把p前替换为5</span></span><br></pre></td></tr></table></figure>
+<p><img src="/img/%E6%AE%B5.png" alt="虚拟地址图"></p>
+<h3 id="2-虚拟地址、mmu">2.虚拟地址、mmu</h3>
+<p>  程序与操作系统共享虚拟地址，64位系统的虚拟地址为0-2<sup>64</sup>，操作系统一般占据高地址，程序占据低地址。程序内涉及的地址值是起始地址+偏移地址，起始地址随机值，即程序内的内存地址也是随机值，原因是为了程序安全。<br>
+如图：<br>
+<img src="/img/%E8%99%9A%E6%8B%9F.png" alt="虚拟地址图"></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/gitlGl">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%A3%E7%A0%81%E6%AE%B5%EF%BC%88text%EF%BC%89%E3%80%81%E6%95%B0%E6%8D%AE%E6%AE%B5%E3%80%81%E5%A0%86%E6%A0%88"><span class="toc-number">1.</span> <span class="toc-text">1. 代码段（text）、数据段、堆栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E3%80%81mmu"><span class="toc-number">2.</span> <span class="toc-text">2.虚拟地址、mmu</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&text=操作系统知识点"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&is_video=false&description=操作系统知识点"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=操作系统知识点&body=Check out this article: http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&title=操作系统知识点"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&name=操作系统知识点&description=&lt;h3 id=&#34;1-代码段（text）、数据段、堆栈&#34;&gt;1. 代码段（text）、数据段、堆栈&lt;/h3&gt;
+&lt;p&gt;1.1 过程&lt;br&gt;
+  程序运行过程是先分配内存，然后从硬盘载入程序（只是载入部分，局部性原理）到内存中，这部分存储程序的内存称为代码段。cpu从代码段段中获取指令进行相关操作，"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/%E6%95%A3%E4%B9%B1%E7%9F%A5%E8%AF%86/&t=操作系统知识点"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    lin
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/gitlGl">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

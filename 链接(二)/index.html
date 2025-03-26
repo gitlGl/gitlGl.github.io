@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ELF目标文件。 ELF的目标文件分为三类：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链接（二）">
+<meta property="og:url" content="http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/index.html">
+<meta property="og:site_name" content="lin&#39;s blog">
+<meta property="og:description" content="ELF目标文件。 ELF的目标文件分为三类：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/%E6%B1%87%E7%BC%96.png">
+<meta property="og:image" content="http://example.com/img/%E8%A7%86%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/img/%E9%87%8D%E5%AE%9A%E4%BD%8D.png">
+<meta property="og:image" content="http://example.com/img/%E6%AE%B5%E4%BD%8D.png">
+<meta property="og:image" content="http://example.com/img/%E8%8A%82%E5%A4%B41.png">
+<meta property="og:image" content="http://example.com/img/%E8%8A%82%E5%A4%B42.png">
+<meta property="og:image" content="http://example.com/img/%E7%9B%AE%E6%A0%87.png">
+<meta property="og:image" content="http://example.com/img/elf.png">
+<meta property="og:image" content="http://example.com/img/%E7%A8%8B%E5%BA%8F%E5%A4%B4%E8%A1%A8.png">
+<meta property="og:image" content="http://example.com/img/%E7%A9%BA%E9%97%B4.png">
+<meta property="article:published_time" content="2022-11-15T15:45:03.000Z">
+<meta property="article:modified_time" content="2022-12-11T10:11:18.579Z">
+<meta property="article:author" content="lin">
+<meta property="article:tag" content="csapp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/%E6%B1%87%E7%BC%96.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>链接（二）</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="lin&#39;s blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/gitlGl">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1-%E6%97%A0%E5%90%8D%E7%AE%A1%E9%81%93/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&text=链接（二）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&is_video=false&description=链接（二）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=链接（二）&body=Check out this article: http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&name=链接（二）&description=&lt;h3 id=&#34;ELF目标文件。&#34;&gt;ELF目标文件。&lt;/h3&gt;
+&lt;p&gt;ELF的目标文件分为三类：&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&t=链接（二）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ELF%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E3%80%82"><span class="toc-number">1.</span> <span class="toc-text">ELF目标文件。</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        链接（二）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">lin</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-11-15T15:45:03.000Z" class="dt-published" itemprop="datePublished">2022-11-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/csapp/" rel="tag">csapp</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="ELF目标文件。">ELF目标文件。</h3>
+<p>ELF的目标文件分为三类：</p>
+<span id="more"></span>
+<p>可重定位目标文件（.o）<br>
+其代码和数据可和其他可重定位文件合并为可执行文件<br>
+每个 .o 文件由对应的 .c 文件生成<br>
+每个 .o 文件的代码和数据地址都是从0开始的偏移<br>
+可执行目标文件（默认为a.out）<br>
+包含的代码和数据可以被直接复制到内存并执行<br>
+代码和数据的地址是虚拟地址空间中的地址<br>
+共享的目标文件（.so 共享库）<br>
+特殊的可重定位目标文件，能在装载到内存或运行时自动被链接，称为共享库文件<br>
+可通过objdump命令对比可重定位目标文件和可执行目标文件的不同：<br>
+<img src="/img/%E6%B1%87%E7%BC%96.png" alt=""><br>
+可以看到，确实可重定位目标文件中的地址是从0开始的，而可执行目标文件中的地址是虚拟地址空间中的地址。<br>
+接下来介绍ELF文件的两种视图：<br>
+链接视图：可重定位文件（Relocatable object files）<br>
+执行视图：可执行目标文件（Executable object files）<br>
+<img src="/img/%E8%A7%86%E5%9B%BE.png" alt=""><br>
+链接视图 —— 可重定位目标文件<br>
+来看一个简单的C代码及其所生成的可重定位目标文件的关系图：<br>
+<img src="/img/%E9%87%8D%E5%AE%9A%E4%BD%8D.png" alt=""><br>
+如上图，编译后的代码部分放到 .text节，已初始化的全局变量和已初始化的静态变量会放到 .data节，未初始化的全局变量和未初始化的静态变量会放到 .bss节。<br>
+实际上，为了进行链接，可重定位目标文件还需要许多其他信息，如符号表、重定位信息等。这些后面会陆续介绍。</p>
+<p>在这里要特别说明一下 .bss节。该节在可重定位目标文件中并不占用空间，只是在节头表相应的表项中说明要为 .bss节预留多大的空间。</p>
+<p>可重定位目标文件中包含有很多的节，格式如下图：<br>
+<img src="/img/%E6%AE%B5%E4%BD%8D.png" alt=""><br>
+其中：<br>
+ELF头<br>
+包括16字节的标识信息、文件类型（.o，exec，.so）、机器类型（如Intel 80386）、节头表的偏移、节头表的表项大小及表项个数。<br>
+.text节<br>
+编译后的代码部分。<br>
+.rodata节<br>
+只读数据，如 printf用到的格式串、switch跳转表等。<br>
+.data节<br>
+已初始化的全局变量和静态变量。<br>
+.bss节<br>
+未初始化全局变量和静态变量，仅是占位符，不占据任何磁盘空间。区分初始化和非初始化是为了空间效率。<br>
+.symtab节<br>
+存放函数和全局变量（符号表）的信息，它不包括局部变量。<br>
+.rel.text节<br>
+.text节的重定位信息，用于重新修改代码段的指令中的地址信息。<br>
+.rel.data节<br>
+.data节的重定位信息，用于对被模块使用或定义的全局变量进行重定位的信息。<br>
+.debug节<br>
+调试用的符号表（gcc -g）<br>
+.strtab节<br>
+包含 .symtab节和 .debug节中的符号及节名<br>
+节头表（Section header table）<br>
+包含每个节的节名在.strtab节中的偏移、节的偏移和节的大小.<br>
+下边分别举例讲一下ELF头和节头表：<br>
+ELF头位于ELF文件的开始，其包含了文件结构的说明信息。其结构体定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> EI_NIDENT 16</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> e_ident[EI_NIDENT];              </span><br><span class="line">    <span class="type">uint16_t</span>      e_type;</span><br><span class="line">    <span class="type">uint16_t</span>      e_machine;</span><br><span class="line">    <span class="type">uint32_t</span>      e_version;</span><br><span class="line">    ElfN_Addr    e_entry;</span><br><span class="line">    ElfN_Off      e_phoff;</span><br><span class="line">    ElfN_Off      e_shoff;</span><br><span class="line">    <span class="type">uint32_t</span>      e_flags;</span><br><span class="line">    <span class="type">uint16_t</span>      e_ehsize;</span><br><span class="line">    <span class="type">uint16_t</span>      e_phentsize;</span><br><span class="line">    <span class="type">uint16_t</span>      e_phnum;</span><br><span class="line">    <span class="type">uint16_t</span>      e_shentsize;</span><br><span class="line">    <span class="type">uint16_t</span>      e_shnum;</span><br><span class="line">    <span class="type">uint16_t</span>      e_shstrndx;</span><br><span class="line">&#125; ElfN_Ehdr;</span><br></pre></td></tr></table></figure>
+<p>用readelf -h 查看ELF头。下表是ELF头中各个成员的含义与readelf输出结果的对照表：</p>
+<p>成员	readelf输出结果及含义<br>
+e_ident	Magic: 7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00<br>
+Class: ELF32<br>
+Data: 2’s complement, little endian<br>
+Version: 1 (current)<br>
+OS/ABI: UNIX - System V<br>
+ABI Version: 0<br>
+e_type	Type: REL（Relocatable file）<br>
+ELF文件类型<br>
+e_machine	Machine: Intel 80386<br>
+ELF文件的CPU平台属性，相关常量以EM_开头<br>
+e_version	Version: 0x1<br>
+ELF版本号。一般为常数1<br>
+e_entry	Entry point address: 0x0<br>
+入口地址，规定ELF程序的入口虚拟地址，操作系统在加载完该程序后从这个地址开始执行进程的指令。可重定位目标文件一般没有入口地址，则这个值为0<br>
+e_phoff	Start of program header: 0 (bytes into file)<br>
+程序头表在文件中的偏移，可重定位目标文件不存在程序头表，故该值为0<br>
+e_shoff	Start of section header: 280(bytes into file)<br>
+节头表在文件中的偏移<br>
+e_flags	Flags: 0x0<br>
+ELF标志位，用来标识一些ELF文件平台相关的属性，相关常量的格式一般为EF_machine_flag，machine为平台，flag为标志<br>
+e_ehsize	Size of this header: 52(bytes)<br>
+即ELF文件头本身的大小<br>
+e_phentsize	Size of program headers: 0(bytes)<br>
+程序头表表项的大小<br>
+e_phnum	Number of program headers: 0<br>
+程序头表表项的数目<br>
+e_shentsize	Size of section headers: 40(bytes)<br>
+节表表项的大小<br>
+e_shnum	Number of section headers: 11<br>
+节表表项的数目<br>
+e_shstrndx	Section header string table index: 8<br>
+节表字符串表在节头表中的下标<br>
+-------------------------------------- 节头表（Section Header Table） ----------------------<br>
+除了ELF头之外，节头表是ELF可重定位目标文件中最重要的部分内容。<br>
+它描述了每个节的节名、在文件中的偏移、大小、访问属性、对齐方式等。其32位结构定义如下（每项占40字节）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Elf32_Word sh_name;   <span class="comment">//节名字符串在.strtab中的偏移</span></span><br><span class="line">    Elf32_Word sh_type;   <span class="comment">//节类型：无效/代码或数据/符号/字符串/…</span></span><br><span class="line">    Elf32_Word sh_flags;  <span class="comment">//节标志：该节在虚拟空间中的访问属性</span></span><br><span class="line">    Elf32_Addr sh_addr;   <span class="comment">//虚拟地址：若可被加载，则对应虚拟地址</span></span><br><span class="line">    Elf32_Off sh_offset;  <span class="comment">//在文件中的偏移地址，对.bss节而言则无意义</span></span><br><span class="line">    Elf32_Word sh_size;   <span class="comment">//节在文件中所占的长度</span></span><br><span class="line">    Elf32_Word sh_link;   <span class="comment">//sh_link和sh_info用于与链接相关的节（如</span></span><br><span class="line">    Elf32_Word sh_info;   <span class="comment">//     .rel.text节、.rel.data节、.symtab节等）   </span></span><br><span class="line">    Elf32_Word sh_addralign; <span class="comment">//节的对齐要求</span></span><br><span class="line">    Elf32_Word sh_entsize;   <span class="comment">//节中每个表项的长度，0表示无固定长度表项</span></span><br><span class="line">&#125; Elf32_Shdr;</span><br></pre></td></tr></table></figure>
+<p>使用 readelf -S命令查看节头表，示例如下：<br>
+<img src="/img/%E8%8A%82%E5%A4%B41.png" alt=""></p>
+<p><img src="/img/%E8%8A%82%E5%A4%B42.png" alt=""><br>
+A（alloc）标志表示该节将进程空间中必须要分配空间。可以看到，.text、.data、.bss、.rodata节都有这个标志。<br>
+执行视图 —— 可执行目标文件<br>
+再来看ELF的执行视图，也就是可执行目标文件的格式：<br>
+<img src="/img/%E7%9B%AE%E6%A0%87.png" alt=""><br>
+它与可重定位目标文件稍有不同：<br>
+ELF文件头中的字段e_entry给出了执行程序时第一条指令的地址，而在可重定位目标文件中，此字段为0；程序头表的偏移e_poff和大小e_phentsiz和程序头表项的个数e_phnum不为0；<br>
+多了一个程序头表，也称为段头表（segment header table），是一个结构体数组；<br>
+多了一个 .init节，用于定义 _init函数，该函数用于在可执行目标文件开始执行时的初始化工作。<br>
+少了两个 .rel节（.rel.text和.rel.data），因为可执行目标文件已经在链接的过程中完成了重定位，已无须重定位。<br>
+使用readelf -h 来看可执行目标文件的ELF头，示例如下<br>
+<img src="/img/elf.png" alt=""><br>
+程序头表描述的可执行文件中的节（section）与虚拟地址空间中的存储段（segment）之间的映射关系。</p>
+<p>程序头表的结构定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Elf32_Word p_type;      <span class="comment">//段类型</span></span><br><span class="line">    Elf32_Off p_offset;        <span class="comment">//该段在文件中的起始偏移</span></span><br><span class="line">    Elf32_Addr p_vaddr;     <span class="comment">//该段的虚拟地址</span></span><br><span class="line">    Elf32_Addr p_paddr;     <span class="comment">//该段的物理地址</span></span><br><span class="line">    Elf32_Word p_filesz;     <span class="comment">//该段在文件中的大小</span></span><br><span class="line">    Elf32_Word p_memsz;  <span class="comment">//该段在内存中的大小</span></span><br><span class="line">    Elf32_Word p_flags;     <span class="comment">//段的标志位，表示访问权限（Read|Write|Exec）</span></span><br><span class="line">    Elf32_Word p_align;     <span class="comment">//段在内存中的对齐要求</span></span><br><span class="line">&#125; Elf32_Phdr;</span><br></pre></td></tr></table></figure>
+<p>下图是用readelf -l 查看到的某可执行目标文件的程序头表：</p>
+<p><img src="/img/%E7%A8%8B%E5%BA%8F%E5%A4%B4%E8%A1%A8.png" alt=""><br>
+Type为Load表示可装入内存的段。<br>
+第一个可装入段：第0x00000~0x004d3字节（包括ELF头、程序头表、.init节、.text节和.rodata节），映射到虚拟地址0x8048000开始长度为0x4d4字节的区域，按0x1000=4KB对齐，具有只读/执行权限（Flg=RE），是只读代码段。<br>
+第二个可装入段：第0x000f0c~开始长度为0x108字节的 .data节，映射到虚拟地址0x8049f0c开始长度为0x110字节的存储区域，在0x110=272B存储区中，前0x108=264B用 .data节内容初始化，后面272-264=8B对应.bss节，初始化为0，按0x1000=64K对齐，具有可读可写权限（Flg=RW），是可读写数据段。</p>
+<p>映射到虚拟地址空间中如图：</p>
+<p><img src="/img/%E7%A9%BA%E9%97%B4.png" alt=""></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/gitlGl">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ELF%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E3%80%82"><span class="toc-number">1.</span> <span class="toc-text">ELF目标文件。</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&text=链接（二）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&is_video=false&description=链接（二）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=链接（二）&body=Check out this article: http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&title=链接（二）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&name=链接（二）&description=&lt;h3 id=&#34;ELF目标文件。&#34;&gt;ELF目标文件。&lt;/h3&gt;
+&lt;p&gt;ELF的目标文件分为三类：&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/%E9%93%BE%E6%8E%A5(%E4%BA%8C)/&t=链接（二）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    lin
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/gitlGl">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>lin&#39;s blog</title>
+  <icon>http://example.com/icon.png</icon>
+  
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2025-03-11T03:42:59.914Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>lin</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://example.com/mysql%E5%AE%89%E8%A3%85/"/>
+    <id>http://example.com/mysql%E5%AE%89%E8%A3%85/</id>
+    <published>2025-03-11T03:42:59.913Z</published>
+    <updated>2025-03-11T03:42:59.914Z</updated>
+    
+    
+    <summary type="html">&lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset=&quot;UTF-8&quot;&gt;
+            &lt;title&gt;windows&amp;#x4e0b;&amp;#x5b89;&amp;#x88c5;mysql&lt;/title&gt;
+            &lt;style&gt;
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+&lt;/style&gt;
+            
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css&quot;&gt;
+&lt;style&gt;
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe WPC&#39;, &#39;Segoe UI&#39;, system-ui, &#39;Ubuntu&#39;, &#39;Droid Sans&#39;, sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        &lt;/style&gt;
+        &lt;style&gt;
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+&lt;/style&gt;
+&lt;style&gt;
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+&lt;/style&gt;
+&lt;style&gt;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+&lt;/style&gt;
+&lt;style&gt;
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert&gt;:first-child {
+  margin-top: 0
+}
+
+.markdown-alert&gt;:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+&lt;/style&gt;
+        
+        &lt;/head&gt;
+        &lt;body class=&quot;vscode-body vscode-light&quot;&gt;
+            &lt;hr&gt;
+&lt;h2 id=&quot;title-mysql安装date-2022-11-03-201837tags-mysqlcategories-数据库&quot;&gt;title: mysql安装
+date: 2022-11-03 20:18:37
+tags: [mysql]
+categories: [数据库]&lt;/h2&gt;
+&lt;h3 id=&quot;windows下安装mysql&quot;&gt;windows下安装mysql&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://dev.mysql.com/downloads/mysql/5.7.html#downloads&quot;&gt;下载网站&lt;/a&gt;，选择zip下载,下载完成解压后把bin目录加入环境变量。&lt;/p&gt;
+&lt;p&gt;在根目录新建一个的ini文件，文件内配置：&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>归并外排序</title>
+    <link href="http://example.com/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/"/>
+    <id>http://example.com/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/</id>
+    <published>2023-05-16T16:33:05.000Z</published>
+    <updated>2023-05-16T16:35:50.434Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;python实现归并外排序&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+    <category term="外排序" scheme="http://example.com/tags/%E5%A4%96%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>词频统计</title>
+    <link href="http://example.com/%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/"/>
+    <id>http://example.com/%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/</id>
+    <published>2023-04-11T13:22:56.000Z</published>
+    <updated>2023-04-11T13:59:16.217Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;毕业季了，遇到别人毕设需要用到python，友情帮助了一下，记录一下。&lt;/p&gt;
+&lt;p&gt;大概目标是爬取上市公司年报，并进行关键词频率统计，爬取网站是巨潮资讯。&lt;br&gt;
+以下链接能获取到巨潮资讯A股公司的一些不要信息，如图所示，</summary>
+    
+    
+    
+    <category term="词频统计" scheme="http://example.com/categories/%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1/"/>
+    
+    
+    <category term="python" scheme="http://example.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>type与object的关系</title>
+    <link href="http://example.com/type%E4%B8%8Eobject%E7%9A%84%E5%85%B3%E7%B3%BB/"/>
+    <id>http://example.com/type%E4%B8%8Eobject%E7%9A%84%E5%85%B3%E7%B3%BB/</id>
+    <published>2023-03-09T02:45:08.000Z</published>
+    <updated>2023-03-09T02:50:58.560Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;如图所示：</summary>
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+    <category term="python" scheme="http://example.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>go包管理</title>
+    <link href="http://example.com/go%E5%8C%85%E7%AE%A1%E7%90%86/"/>
+    <id>http://example.com/go%E5%8C%85%E7%AE%A1%E7%90%86/</id>
+    <published>2023-02-15T08:57:30.000Z</published>
+    <updated>2023-02-15T08:58:50.398Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;1.gopath,不使用mod管理时候外部包的引入通过环境变量gopath引入，包括自建包。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="go" scheme="http://example.com/categories/go/"/>
+    
+    
+    <category term="go" scheme="http://example.com/tags/go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>自定义Windows右键菜单</title>
+    <link href="http://example.com/%E8%87%AA%E5%AE%9A%E4%B9%89Windows%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/"/>
+    <id>http://example.com/%E8%87%AA%E5%AE%9A%E4%B9%89Windows%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/</id>
+    <published>2023-02-06T06:07:47.000Z</published>
+    <updated>2023-02-06T06:11:07.936Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;1、win+R快捷键，输入regedit后回车，打开注册表编辑器；&lt;/p&gt;
+&lt;p&gt;在注册表编辑器中找到 “计算机\HKEY_CLASSES_ROOT\Directory\Background\shell”，&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="windows配置" scheme="http://example.com/categories/windows%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="杂" scheme="http://example.com/tags/%E6%9D%82/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习资源链接</title>
+    <link href="http://example.com/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/"/>
+    <id>http://example.com/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/</id>
+    <published>2023-02-06T05:54:46.000Z</published>
+    <updated>2024-04-06T02:01:20.461Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;学习资源链接收集：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="学习资源链接" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/"/>
+    
+    
+    <category term="学习资源链接" scheme="http://example.com/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pyqt5线程正确用法</title>
+    <link href="http://example.com/pyqt5%E7%BA%BF%E7%A8%8B%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/"/>
+    <id>http://example.com/pyqt5%E7%BA%BF%E7%A8%8B%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/</id>
+    <published>2023-01-31T02:31:02.000Z</published>
+    <updated>2023-01-31T02:35:16.083Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;timer任务为Qthread里另一条线程，Qthread实质为管理线程的工具&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+    <category term="pyqt线程" scheme="http://example.com/tags/pyqt%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python.asyncio/await</title>
+    <link href="http://example.com/python-asyncio-await/"/>
+    <id>http://example.com/python-asyncio-await/</id>
+    <published>2023-01-31T02:09:04.000Z</published>
+    <updated>2023-02-02T06:37:46.957Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;asyncio.wait 用法：&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+    <category term="asyncio" scheme="http://example.com/tags/asyncio/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python参数传递</title>
+    <link href="http://example.com/python%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"/>
+    <id>http://example.com/python%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</id>
+    <published>2022-12-27T09:06:24.000Z</published>
+    <updated>2022-12-27T09:19:16.910Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;引用其实是一个类似指针的变量，参数传递的是复制的变量（引用）&lt;/strong&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+    <category term="python基础" scheme="http://example.com/tags/python%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于python的sqlite3连接池</title>
+    <link href="http://example.com/%E5%9F%BA%E4%BA%8Epython%E7%9A%84sqlite3%E8%BF%9E%E6%8E%A5%E6%B1%A0/"/>
+    <id>http://example.com/%E5%9F%BA%E4%BA%8Epython%E7%9A%84sqlite3%E8%BF%9E%E6%8E%A5%E6%B1%A0/</id>
+    <published>2022-12-26T14:19:42.000Z</published>
+    <updated>2022-12-26T14:55:20.755Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;连接池应该用单例模式，可以实例化后通过import方式引入&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;例如: test = Database(),import test,应该保证test实例全局唯一。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+    <category term="sqlite3" scheme="http://example.com/tags/sqlite3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>开源协议</title>
+    <link href="http://example.com/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/"/>
+    <id>http://example.com/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/</id>
+    <published>2022-12-11T00:46:42.000Z</published>
+    <updated>2022-12-11T10:11:18.560Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;各种开源协议的区别如图所示：-more&quot;&gt;各种开源协议的区别如图所示：</summary>
+    
+    
+    
+    <category term="杂" scheme="http://example.com/categories/%E6%9D%82/"/>
+    
+    
+    <category term="开源协议" scheme="http://example.com/tags/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java环境常识</title>
+    <link href="http://example.com/java%E7%8E%AF%E5%A2%83%E5%B8%B8%E8%AF%86/"/>
+    <id>http://example.com/java%E7%8E%AF%E5%A2%83%E5%B8%B8%E8%AF%86/</id>
+    <published>2022-12-11T00:34:55.000Z</published>
+    <updated>2022-12-11T10:11:18.550Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;1-JVM介绍&quot;&gt;1.JVM介绍&lt;/h3&gt;
+&lt;h4 id=&quot;1-1-什么是JVM？&quot;&gt;1.1 什么是JVM？&lt;/h4&gt;
+&lt;p&gt;JVM是Java Virtual Machine（Java虚拟机）的简称，是一种用于计算设备的规范，是一个虚构出来的计算机，通过在实际的计算机上仿真模拟各种计算机功能来实现的。</summary>
+    
+    
+    
+    <category term="java" scheme="http://example.com/categories/java/"/>
+    
+    
+    <category term="java" scheme="http://example.com/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>kmp算法</title>
+    <link href="http://example.com/kmp%E7%AE%97%E6%B3%95/"/>
+    <id>http://example.com/kmp%E7%AE%97%E6%B3%95/</id>
+    <published>2022-12-08T06:23:31.000Z</published>
+    <updated>2022-12-25T08:15:23.769Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;字符串匹配算法&lt;/strong&gt;&lt;br&gt;
+1.暴力求解代码如下：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="C语言" scheme="http://example.com/categories/C%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="算法" scheme="http://example.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>setupUi()函数</title>
+    <link href="http://example.com/setupUi-%E5%87%BD%E6%95%B0/"/>
+    <id>http://example.com/setupUi-%E5%87%BD%E6%95%B0/</id>
+    <published>2022-12-04T07:00:14.000Z</published>
+    <updated>2022-12-11T10:11:18.553Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;qt提供了工具以拖拽控件的方式的简化了Ui代码的编写，在qtcreator里设计好ui后会自动生成对应qml文件，qml会被翻译成C++代码。同样地，qml文件也可以翻译成python代码，然后pyqt里调用翻译出来的ui.py代码。</summary>
+    
+    
+    
+    <category term="pyqt" scheme="http://example.com/categories/pyqt/"/>
+    
+    
+    <category term="pyqt" scheme="http://example.com/tags/pyqt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windows下使用wsl安装linux</title>
+    <link href="http://example.com/windows%E4%B8%8B%E4%BD%BF%E7%94%A8wsl%E5%AE%89%E8%A3%85linux/"/>
+    <id>http://example.com/windows%E4%B8%8B%E4%BD%BF%E7%94%A8wsl%E5%AE%89%E8%A3%85linux/</id>
+    <published>2022-12-03T03:24:45.000Z</published>
+    <updated>2022-12-11T10:11:18.555Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;1.打开虚拟服务以及wsl子系统功能&lt;/strong&gt;&lt;br&gt;
+打开 控制面板，选择 程序和功能，选择 启用和关闭Windows功能，勾选图中红框内的两项。&lt;br&gt;
+如图所示：</summary>
+    
+    
+    
+    <category term="linux" scheme="http://example.com/categories/linux/"/>
+    
+    
+    <category term="wsl" scheme="http://example.com/tags/wsl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用&#39;|&#39;运算符进行配置的原理</title>
+    <link href="http://example.com/%E5%88%A9%E7%94%A8%E2%80%9C%E6%88%96%E2%80%9D%E8%BF%90%E7%AE%97%E7%AC%A6%E8%BF%9B%E8%A1%8C%E9%85%8D%E7%BD%AE%E7%9A%84%E5%8E%9F%E7%90%86/"/>
+    <id>http://example.com/%E5%88%A9%E7%94%A8%E2%80%9C%E6%88%96%E2%80%9D%E8%BF%90%E7%AE%97%E7%AC%A6%E8%BF%9B%E8%A1%8C%E9%85%8D%E7%BD%AE%E7%9A%84%E5%8E%9F%E7%90%86/</id>
+    <published>2022-11-30T23:30:52.000Z</published>
+    <updated>2022-12-11T10:11:18.559Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;粉丝很多的何同学做了期关于键盘开发的视频，视频里面出了点低级错误。</summary>
+    
+    
+    
+    <category term="杂" scheme="http://example.com/categories/%E6%9D%82/"/>
+    
+    
+    <category term="杂" scheme="http://example.com/tags/%E6%9D%82/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++对象细节</title>
+    <link href="http://example.com/C-%E5%AF%B9%E8%B1%A1%E7%BB%86%E8%8A%82/"/>
+    <id>http://example.com/C-%E5%AF%B9%E8%B1%A1%E7%BB%86%E8%8A%82/</id>
+    <published>2022-11-25T01:04:55.000Z</published>
+    <updated>2024-04-05T22:21:23.555Z</updated>
+    
+    
+    <summary type="html">&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title class_&quot;&gt;A&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;type&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&amp;#123;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;A *a = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;A&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;built_in&quot;&gt;X&lt;/span&gt;();&lt;span class=&quot;comment&quot;&gt;//调用&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="C++" scheme="http://example.com/categories/C/"/>
+    
+    
+    <category term="C++" scheme="http://example.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>归并排序</title>
+    <link href="http://example.com/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
+    <id>http://example.com/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</id>
+    <published>2022-11-21T06:16:29.000Z</published>
+    <updated>2022-12-26T04:39:31.104Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;归并排序过程如图所示：&lt;/strong&gt;</summary>
+    
+    
+    
+    <category term="C语言" scheme="http://example.com/categories/C%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="数据结构" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>二分查找</title>
+    <link href="http://example.com/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"/>
+    <id>http://example.com/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</id>
+    <published>2022-11-19T04:01:43.000Z</published>
+    <updated>2022-12-11T10:11:18.556Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;代码如下:&lt;/strong&gt;</summary>
+    
+    
+    
+    <category term="C语言" scheme="http://example.com/categories/C%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="数据结构" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+</feed>

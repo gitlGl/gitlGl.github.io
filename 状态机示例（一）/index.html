@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="如图所示，图中的状态转换即是状态机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="状态机示例（一）">
+<meta property="og:url" content="http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="lin&#39;s blog">
+<meta property="og:description" content="如图所示，图中的状态转换即是状态机">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/%E6%85%B5%E6%87%92.jpg">
+<meta property="article:published_time" content="2022-11-03T14:36:12.000Z">
+<meta property="article:modified_time" content="2022-12-11T10:11:18.566Z">
+<meta property="article:author" content="lin">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="状态机">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/%E6%85%B5%E6%87%92.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>状态机示例（一）</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="lin&#39;s blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/gitlGl">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/%E7%8A%B6%E6%80%81%E6%9C%BA%E5%99%A8%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%BA%8C%EF%BC%89/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/%E7%AE%80%E6%98%93%E9%BB%91%E7%AA%97%E8%81%8A%E5%A4%A9%E5%AE%A4/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&text=状态机示例（一）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&is_video=false&description=状态机示例（一）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=状态机示例（一）&body=Check out this article: http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&name=状态机示例（一）&description=&lt;p&gt;&lt;strong&gt;如图所示，图中的状态转换即是状态机&lt;/strong&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&t=状态机示例（一）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        状态机示例（一）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">lin</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-11-03T14:36:12.000Z" class="dt-published" itemprop="datePublished">2022-11-03</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/python/" rel="tag">python</a>, <a class="p-category" href="/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/" rel="tag">状态机</a>, <a class="p-category" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><strong>如图所示，图中的状态转换即是状态机</strong></p>
+<span id="more"></span>
+<p><img src="/img/%E6%85%B5%E6%87%92.jpg" alt="慵懒"></p>
+<p>上图所示用python代码描述如下：</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        点击显/隐内容
+    </div>
+    <div class='spoiler-content'>
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random,time</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtWidgets <span class="keyword">import</span> QWidget, QPushButton</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtWidgets <span class="keyword">import</span> QApplication</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">状态 = <span class="string">&quot;发呆&quot;</span></span><br><span class="line"><span class="comment">###某状态下发生事件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">发呆</span>():</span><br><span class="line">    事件 = [困了,饿了,想打游戏,憋得慌 ]</span><br><span class="line">    随机事件 = random.randint(<span class="number">0</span>,<span class="built_in">len</span>(事件)-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">global</span> 状态</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;事件：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(事件[随机事件]()),<span class="string">&quot;状态改变：--&gt;&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(状态))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">在卧室</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;事件：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(醒了()),<span class="string">&quot;状态改变：--&gt;发呆&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">在客厅</span>():</span><br><span class="line">     <span class="built_in">print</span>(<span class="string">&quot;事件：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(打累了()),<span class="string">&quot;状态改变：--&gt;发呆&quot;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">在厕所</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;事件：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(处理完毕()),<span class="string">&quot;状态改变：--&gt;发呆&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">在饭厅</span>():</span><br><span class="line">     <span class="built_in">print</span>(<span class="string">&quot;事件：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(吃完()),<span class="string">&quot;状态改变：--&gt;发呆&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">在厨房</span>():</span><br><span class="line">     <span class="built_in">print</span>(<span class="string">&quot;事件：&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(做好了饭()),<span class="string">&quot;状态改变：--&gt;饭厅&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#发生事件，改变状态</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">困了</span>():</span><br><span class="line">    <span class="keyword">global</span> 状态</span><br><span class="line">    状态 = <span class="string">&quot;在卧室&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;困了&quot;</span></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">醒了</span>():</span><br><span class="line">    <span class="keyword">global</span> 状态</span><br><span class="line">    状态 = <span class="string">&quot;发呆&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;醒了;&quot;</span></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">想打游戏</span>():</span><br><span class="line">    <span class="keyword">global</span> 状态</span><br><span class="line">    状态 = <span class="string">&quot;在客厅&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;想打游戏&quot;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">打累了</span>():</span><br><span class="line">    <span class="keyword">global</span> 状态</span><br><span class="line">    状态 = <span class="string">&quot;发呆&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;打累了&quot;</span></span><br><span class="line">   </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">饿了</span>():</span><br><span class="line">    <span class="keyword">global</span> 状态</span><br><span class="line">    状态 = <span class="string">&quot;在厨房&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;饿了&quot;</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">做好了饭</span>():</span><br><span class="line">     <span class="keyword">global</span> 状态</span><br><span class="line">     状态 = <span class="string">&quot;在饭厅&quot;</span></span><br><span class="line">     <span class="keyword">return</span> <span class="string">&quot;做好了饭&quot;</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">吃完</span>():</span><br><span class="line">    <span class="keyword">global</span> 状态</span><br><span class="line">    状态 = <span class="string">&quot;发呆&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;吃完了&quot;</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">憋得慌</span>():</span><br><span class="line">    <span class="keyword">global</span> 状态</span><br><span class="line">    状态 = <span class="string">&quot;在厕所&quot;</span></span><br><span class="line">    <span class="keyword">return</span>  <span class="string">&quot;憋得慌&quot;</span></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">处理完毕</span>():</span><br><span class="line">    <span class="keyword">global</span> 状态</span><br><span class="line">    状态 = <span class="string">&quot;发呆&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;处理完毕&quot;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    状态_ = &#123;</span><br><span class="line">        <span class="string">&quot;发呆&quot;</span>:发呆,<span class="string">&quot;在厕所&quot;</span>:在厕所,<span class="string">&quot;在客厅&quot;</span>:在客厅,<span class="string">&quot;在饭厅&quot;</span>:在饭厅,<span class="string">&quot;在卧室&quot;</span>:在卧室,</span><br><span class="line">        <span class="string">&quot;在厕所&quot;</span>:在厕所,<span class="string">&quot;在厨房&quot;</span>:在厨房</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;当前状态:&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(状态))</span><br><span class="line">        状态_[状态]()<span class="comment">#发生状态事件</span></span><br><span class="line">        time.sleep(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>用状态机实现按钮点击事件，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">状态机</span>(<span class="title class_ inherited__">QWidget</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.btn1 = QPushButton(self)</span><br><span class="line">        self. btn1.setText(<span class="string">&quot;初始状态&quot;</span>)</span><br><span class="line">        self.btn1.clicked.connect(self.change)</span><br><span class="line">        self.状态列表 = [self.状态<span class="number">1</span>,self.状态<span class="number">2</span>,self.状态<span class="number">3</span>,self.状态<span class="number">4</span>,</span><br><span class="line">        self.状态<span class="number">5</span>,self.状态<span class="number">6</span>,self.初始状态]</span><br><span class="line">        self.i = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">change</span>(<span class="params">self</span>):</span><br><span class="line">        self.状态列表[self.i]()<span class="comment">#执行状态事件</span></span><br><span class="line">        <span class="keyword">if</span> self.i == (<span class="built_in">len</span>(self.状态列表)-<span class="number">1</span>):</span><br><span class="line">           self.i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:self.i = self.i +<span class="number">1</span><span class="comment">#改变状态</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">初始状态</span>(<span class="params">self</span>):</span><br><span class="line">      self.btn1.setText(<span class="string">&quot;初始状态&quot;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">状态1</span>(<span class="params">self</span>):</span><br><span class="line">      self.btn1.setText(<span class="string">&quot;状态1&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">状态2</span>(<span class="params">self</span>):</span><br><span class="line">      self.btn1.setText(<span class="string">&quot;状态2&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">状态3</span>(<span class="params">self</span>):</span><br><span class="line">       self.btn1.setText(<span class="string">&quot;状态3&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">状态4</span>(<span class="params">self</span>):</span><br><span class="line">       self.btn1.setText(<span class="string">&quot;状态4&quot;</span>)   </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">状态5</span>(<span class="params">self</span>):</span><br><span class="line">       self.btn1.setText(<span class="string">&quot;状态5&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">状态6</span>(<span class="params">self</span>):</span><br><span class="line">      self.btn1.setText(<span class="string">&quot;状态6&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line">    win = 状态机()</span><br><span class="line">    win.show()</span><br><span class="line">    app.exec_()</span><br></pre></td></tr></table></figure>
+    </div>
+</div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/gitlGl">项目</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&text=状态机示例（一）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&is_video=false&description=状态机示例（一）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=状态机示例（一）&body=Check out this article: http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&title=状态机示例（一）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&name=状态机示例（一）&description=&lt;p&gt;&lt;strong&gt;如图所示，图中的状态转换即是状态机&lt;/strong&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/%E7%8A%B6%E6%80%81%E6%9C%BA%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89/&t=状态机示例（一）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    lin
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/%E5%BD%92%E5%B9%B6%E5%A4%96%E6%8E%92%E5%BA%8F/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/gitlGl">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
